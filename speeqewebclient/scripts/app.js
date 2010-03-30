@@ -341,6 +341,11 @@ Speeqe.Application.prototype = {
 			if('201' == status)
 			{
 			    my_app._chat.createInstantRoom();
+			    
+			    //set topic by $_GET url ?topic=mytopic
+			    if ($.getURLParam("topic")!=null) {
+                    my_app._chat.setTopic($.getURLParam("topic"));
+                }
 			}
 			if('307' == status || '301' == status)
 			{

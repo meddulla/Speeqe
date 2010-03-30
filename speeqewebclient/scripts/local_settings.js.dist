@@ -22,6 +22,11 @@ Speeqe.BOSH_URL =  "/xmpp-httpbind";
 //the dialog.
 Speeqe.helpDialogHtml = "";
 
+//the theme for emoticons
+Speeqe.THEME = 'default';
+//symbols like :) are replaced with images in /images/_theme/emoticons
+Speeqe.ENABLE_EMOTICONS = true;
+
 /* 
 
 use this function to replace the anonymous nick selection. The default

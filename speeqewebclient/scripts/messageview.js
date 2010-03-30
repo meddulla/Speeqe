@@ -17,6 +17,7 @@ Speeqe.MessageView.prototype = {
 	//match and replace a link with html
 
 	message = this.htmlLink(message,auto_inline);
+	message = this.emoticons(message);
 	message = message.replace(/^\/me/,"");
 	message = message.replace(/\n/g,"<br />");
 	return message;
@@ -413,6 +414,27 @@ Speeqe.MessageView.prototype = {
 	return elem;
 	
     },
+    
+    emoticons: function(text){
+        if(Speeqe.ENABLE_EMOTICONS == false){
+            return text;
+        }
+        var theme = Speeqe.THEME;
+        var emos = ["\\:\\)","\\:\\(","\\;\\)","\\:\\p"];
+        var emos_imgs = ["icon_shaking2.gif","icon_shaking.gif","icon_pirat.gif","icon_tongue.gif"];
+        var retval = text;
+        var icon_img = '';
+        var re = '';
+                
+        for (var i=0; i < emos.length; ++i) {
+            icon_img = '<img src="/images/'+theme+'_theme/emoticons/' + emos_imgs[i] + '" alt="'+ emos[i] + '"/>';
+            re = new RegExp(emos[i],"ig");
+            retval = retval.replace(re, icon_img);
+        };
+        
+        return retval;
+    },
+
     
     htmlLink: function(text,auto_inline) {
 	var imgurl = /((?:ht|f)tps?:\/\/.+\.(png|jpeg|jpg|gif|bmp)$)/ig;

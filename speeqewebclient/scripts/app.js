@@ -335,9 +335,11 @@ Speeqe.Application.prototype = {
 			    my_app._chat.createInstantRoom();
 			    
 			    //set topic by $_GET url ?topic=mytopic 
-			    if ($.getURLParam("topic")!=null) {
-			        var str_url = $.getURLParam("topic");
-                    my_app._chat.setTopic( unescape(str_url.replace(/\+/g, " ")) );
+			    var query = window.location.search.substring(1);
+                keyvals = query.split('=');
+			    if (keyvals[0]!=null && keyvals[0] == 'topic') {
+			        var topic = keyvals[1];
+                    my_app._chat.setTopic( unescape(topic.replace(/\+/g, " ")) );
                 }
 			    
 			}

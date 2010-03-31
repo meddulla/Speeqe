@@ -85,11 +85,21 @@ var Speeqe = {
 		*/
 		$("#send_chat_message").keypress( function(key) {
 		    var retval = false;
+		    var f1_keycode = 112;
+		    if(jQuery.browser.safari)
+			{
+			    f1_keycode = 63236;
+			}
 		    if(Speeqe._clear_text)
 			{
 			    $("#send_chat_message").empty();
 			    $("#send_chat_message").attr("value","");
 			    Speeqe._clear_text = false;
+			}
+		    if(key.keyCode == f1_keycode) //F1
+			{
+			    Speeqe.loadHelpDialog();
+			    return false;	 
 			}
 		    if (key.which == 13) //enter key
 			{
@@ -251,6 +261,18 @@ var Speeqe = {
 		    }
 		});
 		
+		$('#rooms_list_dialog').draggable({
+			       zIndex: 	20,
+			       opacity: 	0.7,
+			       handle:	'#rooms_list_dialog_handle'
+					    });
+
+		$('#rooms_list_dialog_close').click(function() {
+		    $("#rooms_list_dialog").hide("fast",function(){
+			app.messageView().scrollTop();
+		    });
+		});
+		
 		$("#configure_chat").click(function() {
 		    $(this).parent("ul").parent("li").click();
 		    if(app)
@@ -259,6 +281,8 @@ var Speeqe = {
 			}
 		    return false;
 		});
+		
+		
 		$('#configure_room_form').draggable({
 			       zIndex: 	20,
 			       opacity: 	0.7,
@@ -279,6 +303,8 @@ var Speeqe = {
 
 		    return false;
 		});
+		
+		
 
 		$("#changeuser").click(function() {
 		    var new_url = "https://"+Speeqe.HTTP_DOMAIN+"/accounts/login/";
@@ -581,6 +607,7 @@ var Speeqe = {
 	{
 	    this._from = this._from + "@" + Speeqe.CHAT_SERVER;
 	}
+	this._from = Strophe.escapeJid(this._from);
 	this._connection = conn;
 	this._nick = nick;
 	this._queue = [];

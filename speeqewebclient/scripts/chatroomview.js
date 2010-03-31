@@ -103,6 +103,27 @@ Speeqe.ChatRoomView.prototype = {
 
 	Speeqe.showDraggable("#room_password_dialog");
     },
+    displayRooms: function(stanza) {
+	//display the dialog that lists available rooms
+	//@todo handle result sets
+        var roomsList = '<ul>';
+        var i = 0;
+        
+        $(stanza).find("item").each(function () {
+            if($(this).attr('name') && $(this).attr('jid') )
+	        {
+	          var roomdomain = $(this).attr('jid').split("@");
+		      room = roomdomain[0];
+		      roomsList += '<li><a href="http://'+Speeqe.XMPP_DOMAIN+'/room/'+room+'/" target="_blank">';
+		      roomsList += $(this).attr('name');
+		      roomsList += '</a></li>';
+	        }
+        });
+        
+        roomsList += '</ul>';
+        $("#rooms_list_dialog_content").html(roomsList);
+	    Speeqe.showDraggable("#rooms_list_dialog");
+    },
     error_map: {'503':"The room is full.",
                 '403':"You are banned from the room.",
                 '401':"Password required",

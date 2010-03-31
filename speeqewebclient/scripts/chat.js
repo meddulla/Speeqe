@@ -104,7 +104,8 @@ Speeqe.Chat.prototype = {
 			   "/unban":this.unBanUser,
 			   "/nick":this.changeNick,
 			   "/join":this.newRoom,
-			   "/help":this.helpDialog
+			   "/help":this.helpDialog,
+			   "/list":this.listRooms
 	};
 
 	var cmdArray = text.split(" ");
@@ -302,6 +303,33 @@ Speeqe.Chat.prototype = {
     helpDialog: function() {
 	Speeqe.loadHelpDialog();
     },
+    
+    listRooms: function(){
+    
+        var iqid = this._connection.getUniqueId("listrooms");
+        var iq = Strophe.xmlElement("iq", [
+					      ["id", iqid],
+					      ["to", Speeqe.CHAT_SERVER],
+					      ["from", this._connection.jid],
+					      ["type", "get"]
+				       ]);
+	    
+	    query = Strophe.xmlElement("query", [
+                                                ["xmlns", 
+						 Strophe.NS.DISCO_ITEMS]
+				      ]);
+        iq.appendChild(query);
+	    this._connection.addHandler(app._chatroom_view.displayRooms,
+				    null,
+				    "iq",
+				    null,
+				    iqid,
+				    null);
+	    this._connection.send(iq);
+	    
+    
+    },
+    
     changeNick: function(user) {
 
 	if(Speeqe.ENABLE_NICK_CHANGE)

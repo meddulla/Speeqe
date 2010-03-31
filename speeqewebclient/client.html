@@ -227,7 +227,7 @@
           border: none;
       }
 
-      #layer1, #debug_log_layer1, #js_error, #configure_room_form,#room_password_dialog {
+      #layer1, #debug_log_layer1, #js_error, #configure_room_form,#room_password_dialog, #rooms_list_dialog {
         position: absolute;
         left: 200px;
         top: 100px;
@@ -241,7 +241,7 @@
       #configure_room_form {
         width: 380px;
       }
-      #layer1_handle, #debug_log_layer1_handle, #configure_room_form_handle,#room_password_dialog_handle {
+      #layer1_handle, #debug_log_layer1_handle, #configure_room_form_handle,#room_password_dialog_handle, #rooms_list_dialog_handle {
         background-color: #5588bb;
         padding: 2px;
         text-align: center;
@@ -250,7 +250,7 @@
         vertical-align: middle;
       }
 
-      #layer1_content, #debug_log_layer1_content, #configure_room_form_content,#room_password_dialog_content {
+      #layer1_content, #debug_log_layer1_content, #configure_room_form_content,#room_password_dialog_content, rooms_list_dialog_content {
         padding: 5px;
       }
 
@@ -270,7 +270,7 @@
         margin-top: 20px;
       }
 
-      #close, #debug_log_close, #configure_room_form_close {
+      #close, #debug_log_close, #configure_room_form_close, #rooms_list_dialog_close {
         float: right;
         text-decoration: none;
         color: #FFFFFF;
@@ -291,6 +291,27 @@
       .me_command .nick_suffix {
         display: none;
       }
+
+      #turnkey-credit {
+          font-family: Tahoma,Sans,Arial,Helvetica,Verdana,sans-serif;
+          font-size: 11px;
+          text-align: center;
+      }
+
+      #turnkey-credit a {
+          text-decoration: none;
+      }
+
+      #turnkey-credit a:hover {
+          text-decoration: underline;
+      }
+      
+      #rooms_list_dialog li, rooms_list_dialog_content li {
+          list-style-type: none;
+          padding-left: 5px;
+          padding-bottom: 5px; 
+      }
+
     </style>
 
     <title>Speeqe</title>{% block getcred %} {% endblock %}
@@ -348,6 +369,17 @@
         </div>
       </div>
     </div>
+    
+    <div id="rooms_list_dialog" style="display:none;">
+	  <div id="rooms_list_dialog_handle">
+            <a id="rooms_list_dialog_close" href="#">[ x ]</a>
+            Avalilable Rooms.
+          </div>
+          <div id="rooms_list_dialog_content">
+          </div>
+      </div>
+    </div>
+    
     <div id="room_password_dialog" style="display:none;">
       <div id="room_password_dialog_handle">
         <a id="room_password_dialog_close" href="#">[ x ]</a>
@@ -451,6 +483,12 @@
         <div id="chatbox">
           <div id="chatbox_inner">
             <textarea id="send_chat_message" cols="40" rows="2"> type and hit enter </textarea>
+          </div>
+          <div id='turnkey-credit' >
+              <div id='override'>
+              <a href='http://www.turnkeylinux.org/appliances/ejabberd'>ejabberd Appliance @ Economico</a> -
+              Powered by <a href='http://www.turnkeylinux.org'>TurnKey Linux</a>
+              </div>
           </div>
         </div>
         <p>

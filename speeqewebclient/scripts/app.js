@@ -253,6 +253,12 @@ Speeqe.Application.prototype = {
     messageView: function() {
 	return this._message_view;
     },
+    changeAvailabilityStatus: function(show,msg) {
+    if (this._chat)
+	{
+	   this._chat.changeAvailabilityStatus(show,msg);
+	}
+    },
     sendMessage: function(text) {
 	if (this._chat)
 	{
@@ -408,11 +414,26 @@ Speeqe.Application.prototype = {
 				    
 				}
 				else
-				    {//update existing user with presence changes
-				    }
+				{
+                      var roster_item_id = "#rosteritem" + roster_item.id;
+				      var roster_item_selector = roster_item_id + " .roster_user_name";
+				}
 				roster_item.getAvatar();
 				
-				
+				//show availability changes
+				var availability = $(stanza).find("show");
+                if(availability.length > 0){
+                    var status_msg = $(stanza).find("status").text();
+                    var availability_code = availability.text();
+                    if(my_app._chat._nick == nick ){
+                        //current user changed availability 
+                        
+                        app._chatroom_view.displayAvailabilityStatusCurrentUser(availability_code, status_msg);
+                        
+                    }
+                    $(roster_item_selector).removeClass("dnd chat away xa").addClass(availability_code);
+                }
+                
 			    }
 			    else if (("error"==$(stanza).attr("type")) || ("unavailable" == $(stanza).attr("type")))
 			    {
@@ -457,8 +478,25 @@ Speeqe.Application.prototype = {
 					});
 					my_app.createRosterPopup($(roster_item_id));
 
+				    }else{
+				        var roster_item_id = "#rosteritem" + roster_item.id;
+				        var roster_item_selector = roster_item_id + " .roster_user_name";
 				    }
 				    roster_item.getAvatar();
+				    
+				    //show availability changes
+				    var availability = $(stanza).find("show");
+                    if(availability.length > 0){
+                        var status_msg = $(stanza).find("status").text();
+                        var availability_code = availability.text();
+                        if(my_app._chat._nick == nick ){
+                            //current user changed availability 
+                            
+                            app._chatroom_view.displayAvailabilityStatusCurrentUser(availability_code, status_msg);
+                            
+                        }
+                        $(roster_item_selector).removeClass("dnd chat away xa").addClass(availability_code);
+                    }
 				    
 				}
 				else if (("error"==$(stanza).attr("type")) || ("unavailable" == $(stanza).attr("type")))

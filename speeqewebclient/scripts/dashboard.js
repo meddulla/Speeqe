@@ -18,11 +18,14 @@ Speeqe.dashBoardInit = function() {
                                 <ul> \
                                         <li><a href=\"http://"+Speeqe.HTTP_DOMAIN+"\" target=\"_blank\" ><img src=\"/images/dashboard/logo.png\" alt=\"Speeqe Logo\" width=\"30\" height=\"27\" /></a></li> \
                                         <li class=\"button\"> \
-                                                <p><span id=\"dashboard_user\">Offline</span> <span id=\"dashboard_available\">is available</span></p> \
+                                                <p><span id=\"dashboard_user\">Offline</span> <span id=\"dashboard_available\"  class=\"available\">is available</span></p> \
                                                 <ul> \
                                                         <li id=\"dashboard_signoff\" style=\"display:none;\" ></span>Sign Off</span></li> \
                                                         <li id=\"dashboard_signon\"><span>Sign On</span></li> \
                                                         <li id='changeuser_prefs'><span>Change User</span></li> \
+                                                        <li id='status_is_available'><span>I'm Available</span></li> \
+                                                        <li id='status_is_busy'><span>I'm Busy</span></li> \
+                                                        <li id='status_is_away'><span>I'm Away</span></li> \
                                                 </ul> \
                                         </li> \
                                 </ul> \

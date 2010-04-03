@@ -76,8 +76,22 @@
 #left-control span#dashboard_user 		{ padding-right: 0; }
 #left-control span#dashboard_available
 {
-   background: url('/images/dashboard/available.png') center right no-repeat;
    display:none;
+}
+
+#left-control span#dashboard_available.available
+{
+   background: url('/images/dashboard/available.png') center right no-repeat;
+}
+
+#left-control span#dashboard_available.busy
+{
+   background: url('/images/dashboard/busy.png') center right no-repeat;
+}
+
+#left-control span#dashboard_available.away
+{
+   background: url('/images/dashboard/away.png') center right no-repeat;
 }
 
 #left-control span#away 		{ background: url('/images/dashboard/away.png') center right no-repeat; }

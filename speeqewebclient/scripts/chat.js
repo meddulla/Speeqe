@@ -330,6 +330,24 @@ Speeqe.Chat.prototype = {
     
     },
     
+    changeAvailabilityStatus: function (show, statusmsg){
+       //available, busy, away, extended away
+       var availability_codes = ['chat','dnd','away','xa'];
+       //@todo check against show
+       var presenceid = this._connection.getUniqueId();
+       
+       presence = $pres({"from": this._connection.jid,
+				          "to": this._from + "/" + this._nick})
+				          .c("status").t(statusmsg).up()
+				          .c("show").t(show)
+				          .tree(); 
+       var x = Strophe.xmlElement("x", [["xmlns", Strophe.NS.MUC]]);
+	    
+	   presence.appendChild(x);		          		          
+       
+       this._connection.send(presence);
+    },
+    
     changeNick: function(user) {
 
 	if(Speeqe.ENABLE_NICK_CHANGE)

@@ -273,6 +273,20 @@ var Speeqe = {
 		    });
 		});
 		
+		//set status
+		$('#status_is_busy').click(function() {
+			app.changeAvailabilityStatus('dnd','');
+		});
+		
+		$('#status_is_away').click(function() {
+			app.changeAvailabilityStatus('away','');
+		});
+		
+		$('#status_is_available').click(function() {
+			app.changeAvailabilityStatus('chat','');
+		});
+		//end availability status
+		
 		$("#configure_chat").click(function() {
 		    $(this).parent("ul").parent("li").click();
 		    if(app)

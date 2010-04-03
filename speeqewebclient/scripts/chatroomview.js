@@ -129,6 +129,14 @@ Speeqe.ChatRoomView.prototype = {
                 '401':"Password required",
                 '407':"Registration required."
     },
+    
+    displayAvailabilityStatusCurrentUser: function(availability, desc){
+        var availability_codes = {"chat": 'available',  "dnd": "busy",  "away": "away","xa": "away"};
+        var status = availability_codes[availability] || 'away';
+        var status_phrase = 'is '+ status; 
+        $("#dashboard_available").removeClass().addClass(status);//clear previous classes & add class
+        $("#dashboard_available").html(status_phrase);
+    },
 
     error: function(chatroom,nick,error) {
 	var error_code = $(error).find("error");

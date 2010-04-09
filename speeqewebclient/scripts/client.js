@@ -285,6 +285,21 @@ var Speeqe = {
 		$('#status_is_available').click(function() {
 			app.changeAvailabilityStatus('chat','');
 		});
+		
+		//auto-detect idleness & renewed activity
+		//user becomes idle if inactive for 10 minutes
+		$.idleTimer(600000);
+ 
+        $(document).bind("idle.idleTimer", function(){
+            // function you want to fire when the user goes idle
+            app.changeAvailabilityStatus('away','');
+        });
+ 
+        $(document).bind("active.idleTimer", function(){
+            // function you want to fire when the user becomes active again
+            app.changeAvailabilityStatus('chat','');
+        });
+		
 		//end availability status
 		
 		$("#configure_chat").click(function() {

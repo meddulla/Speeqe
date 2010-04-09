@@ -99,9 +99,10 @@ Speeqe.showDraggable = function(selector,offset) {
     {
 	viewPortHeight = document.documentElement.clientHeight;
 	viewPortWidth = document.documentElement.clientWidth;
-	
+	if(!$.browser.safari){
 	scrollTop = document.documentElement.scrollTop;
 	scrollLeft = document.documentElement.scrollLeft;
+	}
     }
     var element = $(selector).get(0);
     var topOffset = Math.ceil(viewPortHeight/2 - element.offsetHeight/2);
